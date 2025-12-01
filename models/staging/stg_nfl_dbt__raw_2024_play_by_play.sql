@@ -45,3 +45,4 @@ renamed as (
 
 select * from renamed
 where PlayType is not null
+  and (PlayType) not in ('TIMEOUT', 'NO PLAY', 'CLOCK STOP', 'EXCEPTION', 'PENALTY')
