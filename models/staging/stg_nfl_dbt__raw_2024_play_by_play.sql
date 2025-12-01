@@ -44,3 +44,4 @@ renamed as (
 )
 
 select * from renamed
+where PlayType is not null
