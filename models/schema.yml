@@ -1,9 +1,17 @@
- version: 2
+version: 2
 
- sources:
-   - name: nfl_dbt
-     tables:
-       - name: raw_2024_play_by_play 
-       - name: raw_cardinals_roster
-       - name: raw_nfl_games_stats
-       - name: raw_saints_roster
+sources:
+  - name: nfl_dbt
+    tables:
+        - name: raw_2024_play_by_play 
+          config:
+            alias: play_by_play
+        - name: raw_cardinals_roster
+          config:
+            alias: cards_roster
+        - name: raw_nfl_games_stats
+          config:
+            alias: nfl_games_stats
+        - name: raw_saints_roster
+          config:
+            alias: saints_roster
