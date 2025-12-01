@@ -1,0 +1,9 @@
+my-profile:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: ton-projet
+      dataset: ton_dataset
+      location: EU
