@@ -1,9 +1,0 @@
-my-profile:
-  target: dev
-  outputs:
-    dev:
-      type: bigquery
-      method: oauth
-      project: nfl-batch2128
-      dataset: nbl_dbt
-      location: EU
