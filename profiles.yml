@@ -4,6 +4,6 @@ my-profile:
     dev:
       type: bigquery
       method: oauth
-      project: ton-projet
-      dataset: ton_dataset
+      project: nfl-batch2128
+      dataset: nbl_dbt
       location: EU
