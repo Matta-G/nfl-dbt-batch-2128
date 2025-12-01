@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: nfl_dbt
     tables:
-        - name: raw_2024_play_by_play 
+        - name: raw_2024_play_by_play
           config:
             alias: play_by_play
         - name: raw_cardinals_roster
