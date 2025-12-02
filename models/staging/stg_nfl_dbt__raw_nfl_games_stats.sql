@@ -28,6 +28,12 @@ renamed as (
        home,
        score_away,
        score_home,
+       CASE WHEN score_away<score_home THEN 'loser'
+            WHEN score_away>score_home THEN 'winner'
+            ELSE 'draw' END as status_away,
+        CASE WHEN score_home<score_away THEN 'loser'
+            WHEN score_home>score_away THEN 'winner'
+            ELSE 'draw' END as status_home,
        first_downs_away,
        first_downs_home,
        first_downs_from_passing_away,

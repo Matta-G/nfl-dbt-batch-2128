@@ -15,3 +15,10 @@ sources:
         - name: raw_saints_roster
           config:
             alias: saints_roster
+  - name: nfl
+    tables: 
+        - name: 2024_agg_rankings_teams
+        - name: players_defense_2024
+        - name: players_passing_2024
+        - name: players_receiving_2024
+        - name: players_rushing_2024

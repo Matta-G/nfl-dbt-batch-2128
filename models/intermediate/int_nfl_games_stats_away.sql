@@ -17,6 +17,7 @@ renamed as (
        matchid,
        away AS team,
        score_away AS score,
+       status_away as status, 
        first_downs_away AS first_downs,
        first_downs_from_passing_away AS first_downs_from_passing,
        first_downs_from_rushing_away AS first_downs_from_rushing,

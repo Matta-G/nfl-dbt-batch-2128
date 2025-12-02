@@ -17,6 +17,7 @@ renamed as (
        matchid,
        home AS team,
        score_home AS score,
+       status_home AS status,
        first_downs_home AS first_downs,
        first_downs_from_passing_home AS first_downs_from_passing,
        first_downs_from_rushing_home AS first_downs_from_rushing,
