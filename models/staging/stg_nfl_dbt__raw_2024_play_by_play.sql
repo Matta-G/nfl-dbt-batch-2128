@@ -40,9 +40,9 @@ renamed as (
         yardlinedirection,
 
     from source
+    where PlayType is not null
+  and PlayType not in ('KICK OFF', 'TIMEOUT', 'NO PLAY', 'CLOCK STOP', 'EXCEPTION', 'PENALTY')
 
 )
 
 select * from renamed
-where PlayType is not null
-  and PlayType not in ('KICK OFF', 'TIMEOUT', 'NO PLAY', 'CLOCK STOP', 'EXCEPTION', 'PENALTY')
