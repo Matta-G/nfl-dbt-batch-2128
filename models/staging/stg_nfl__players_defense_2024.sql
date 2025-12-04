@@ -48,29 +48,35 @@ renamed as (
             ELSE team
         END as team,
         CASE
-            WHEN pos IN('CB', 'LCB', 'RCB', 'LCB', 'RCB', 'S', 'SS', 'FS') THEN 'Defensive Back'
-            WHEN pos IN('LB', 'MLB', 'ILB', 'LILB', 'RILB', 'OLB', 'LOLB', 'ROLB', 'LLB', 'RLB') THEN 'Linebacker'
-            WHEN pos IN('DE', 'LDE', 'RDE', 'DT', 'NT', 'DL', 'LDT', 'RDT') THEN 'Defensive Line'
+            WHEN pos IN('CB', 'LCB', 'RCB', 'LCB', 'RCB', 'S', 'SS', 'FS') THEN 'DB'
+            WHEN pos IN('LB', 'MLB', 'ILB', 'LILB', 'RILB', 'OLB', 'LOLB', 'ROLB', 'LLB', 'RLB') THEN 'LB'
+            WHEN pos IN('DE', 'LDE', 'RDE', 'DT', 'NT', 'DL', 'LDT', 'RDT') THEN 'DL'
             ELSE 'Other'
         END as pos_category,
         pos,
         g,
         gs,
-        def_interceptions_int,
+        db_int,
         def_interceptions_yds,
         def_interceptions_inttd,
         def_interceptions_lng,
-        def_interceptions_pd,
+        db_pd AS db_pass_defended, --Passes Defended
+        db_tgt AS db_target, --Times Targeted as a Defender
+        db_cmp AS db_completed_pass, --Completed passes when the WR of the defender is targeted (The lower the better)
+        db_lb_cmp_pct, -- Completion Percentage Allowed Targets % (The lower the better)
+        db_yac AS db_yrds_aftr_ctch, -- Yards after catch on completion (The lower the better)
         fumbles_ff,
         fumbles_fmb,
         fumbles_fr,
         fumbles_yds,
         fumbles_frtd,
         sk,
-        tackles_comb,
-        tackles_solo,
+        lb_tackles_comb,
+        lb_tackles_solo,
+        lb_tackles_tfl,
+        lb_press,
+        lb_tackles_succ_rate_pct, -- Tackles success rate percentage : combined / missed tackles
         tackles_ast,
-        tackles_tfl,
         tackles_qbhits,
         sfty,
         awards,
