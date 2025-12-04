@@ -3,7 +3,7 @@ SELECT
 
     -- General Information
     player,
-    team
+    team,
     pos_category,
     pos,
 
