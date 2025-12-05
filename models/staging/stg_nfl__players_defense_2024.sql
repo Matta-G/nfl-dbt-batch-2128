@@ -48,7 +48,7 @@ renamed as (
             ELSE team
         END as team,
         CASE
-            WHEN pos IN('CB', 'LCB', 'RCB', 'LCB', 'RCB', 'S', 'SS', 'FS') THEN 'DB'
+            WHEN pos IN('CB', 'LCB', 'RCB', 'LCB', 'RCB', 'S', 'SS', 'FS', 'DB') THEN 'DB'
             WHEN pos IN('LB', 'MLB', 'ILB', 'LILB', 'RILB', 'OLB', 'LOLB', 'ROLB', 'LLB', 'RLB') THEN 'LB'
             WHEN pos IN('DE', 'LDE', 'RDE', 'DT', 'NT', 'DL', 'LDT', 'RDT') THEN 'DL'
             ELSE 'Other'

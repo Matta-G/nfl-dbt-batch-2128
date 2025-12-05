@@ -1,12 +1,14 @@
 WITH max_table AS (
     SELECT
+        player_pk,
+        player,
         pos,
         pass_yrds,
         rec_yrds,
         rush_yrds,
-        ROW_NUMBER() OVER (PARTITION BY pos, pass_yrds) AS qb_rank,
-        ROW_NUMBER() OVER (PARTITION BY pos, rec_yrds) AS wr_rank,
-        ROW_NUMBER() OVER (PARTITION BY pos, rush_yrds) AS rb_rank,
+        ROW_NUMBER() OVER (PARTITION BY pos ORDER BY pass_yrds DESC) AS qb_rank,
+        ROW_NUMBER() OVER (PARTITION BY pos ORDER BY rec_yrds DESC) AS wr_rank,
+        ROW_NUMBER() OVER (PARTITION BY pos ORDER BY rush_yrds DESC) AS rb_rank,
         
         -- Infos générales
         age,
@@ -57,21 +59,23 @@ WITH max_table AS (
         MAX(rb_rsh_yrds_per_attmpt) OVER () AS max_rb_rsh_yrds_per_attmpt,
         MAX(rb_rsh_yrds_per_game) OVER () AS max_rb_rsh_yrds_per_game
 
-    FROM {{ ref('int_nfl_players_offense') }}
+    FROM {{ ref('int_nfl_players_offense_final') }}
 )
 
 SELECT
+    player_pk,
+    player,
     pos,
+    pass_yrds,
+    qb_rank,
     CASE
         WHEN qb_rank <= 5 THEN 'Top 5 quarterback'
         ELSE 'Average quarterback' 
     END AS qb_cat,
-    ROW_NUMBER() OVER (PARTITION BY pos, rec_yrds) AS wr_rank,
     CASE
         WHEN wr_rank <= 5 THEN 'Top 5 receiver'
         ELSE 'Average receiver' 
     END AS wr_cat,
-    ROW_NUMBER() OVER (PARTITION BY pos, rush_yrds) AS rb_rank,
     CASE
         WHEN rb_rank <= 5 THEN 'Top 5 running back'
         ELSE 'Average running back' 

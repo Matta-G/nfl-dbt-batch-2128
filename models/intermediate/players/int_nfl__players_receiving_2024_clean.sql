@@ -14,4 +14,4 @@ SELECT
     *
 FROM row_nb_table
 WHERE 
-    (row_nb = 1) AND (player <> 'League Average')
+    (row_nb = 1) AND (player <> 'League Average') AND (pos_category <> 'Other')

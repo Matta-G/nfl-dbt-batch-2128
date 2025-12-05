@@ -6,6 +6,7 @@ SELECT
     team,
     pos_category,
     pos,
+    age,
 
     -- Defensive Backs
     ROUND(SAFE_DIVIDE(db_int,g),2) AS db_int_per_game, -- Interceptions / Game
@@ -23,3 +24,4 @@ SELECT
     lb_tackles_succ_rate_pct, -- Tackles success rate percentage : combined / missed tackles
 
 FROM {{ ref('int_nfl__players_defense_2024_clean') }}
+WHERE pos_category <> 'Other'

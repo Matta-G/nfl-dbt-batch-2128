@@ -42,6 +42,13 @@ SELECT
         WHEN rec.pos IS NOT NULL THEN rec.pos
         ELSE rush.pos
     END AS pos,
+    CASE 
+        WHEN pass.pos_category IS NOT NULL THEN pass.pos_category
+        WHEN rec.pos_category IS NOT NULL THEN rec.pos_category
+        ELSE rush.pos_category
+    END AS pos_category,
+
+
     -- Stats QB
     pass.comp_perc AS qb_comp_perc,
     SAFE_DIVIDE(pass.td,pass.int) AS qb_td_int_ratio,
@@ -70,4 +77,5 @@ LEFT JOIN {{ ref('int_nfl__players_receiving_2024_clean') }} AS rec
 USING(player_pk) 
 LEFT JOIN {{ ref('int_nfl_players_rushing_2024_clean') }}  AS rush
 USING(player_pk)
+
 ORDER BY pos
