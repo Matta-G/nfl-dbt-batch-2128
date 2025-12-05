@@ -7,6 +7,13 @@ SELECT
     pos_category,
     pos,
     age,
+    CASE
+        WHEN age >= 20
+            AND age <=24 THEN '20-24'
+        WHEN age >= 25
+            AND age <=29 THEN '25-29'
+        ELSE '30-40'
+    END as age_category,
 
     -- Defensive Backs
     ROUND(SAFE_DIVIDE(db_int,g),2) AS db_int_per_game, -- Interceptions / Game
