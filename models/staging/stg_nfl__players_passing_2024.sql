@@ -55,9 +55,10 @@ renamed as (
             ELSE 'Other'
         END as pos_category,
         pos,
-        g,
-        gs,
+        g AS games_played,
+        gs AS games_started,
         qbrec,
+        ROUND(CAST((SUBSTR(qbrec, 1, INSTR(qbrec, '-', 1, 1)-1)) AS FLOAT64) / 17, 2) AS reg_winrate,        
         cmp,
         att,
         cmp_ AS comp_perc,

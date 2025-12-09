@@ -55,8 +55,8 @@ renamed as (
             ELSE 'Other'
         END as pos_category,
         pos,
-        g,
-        gs,
+        g AS games_played,
+        gs AS games_started,        
         receiving_tgt,
         receiving_rec,
         receiving_yds AS rec_yrds,

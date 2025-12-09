@@ -27,13 +27,19 @@ temp AS (
         pass_yrds,
         rec_yrds,
         rush_yrds,
+        reg_winrate AS qb_win_rate,
 
         -- Infos générales
+        CASE
+            WHEN pass.games_played IS NOT NULL THEN pass.games_played
+            WHEN rec.games_played IS NOT NULL THEN rec.games_played
+            ELSE rush.games_played
+        END AS games_played,
         CASE 
-            WHEN pass.player IS NOT NULL THEN pass.player
-            WHEN rec.player IS NOT NULL THEN rec.player
-            ELSE rush.player
-        END AS player,
+            WHEN pass.games_started IS NOT NULL THEN pass.games_started
+            WHEN rec.games_started IS NOT NULL THEN rec.games_started
+            ELSE rush.games_started
+        END AS games_started,
         CASE 
             WHEN pass.age IS NOT NULL THEN pass.age
             WHEN rec.age IS NOT NULL THEN rec.age
@@ -49,6 +55,11 @@ temp AS (
             WHEN rec.pos_category IS NOT NULL THEN rec.pos_category
             ELSE rush.pos_category
         END AS pos_category,
+        CASE 
+            WHEN pass.team IS NOT NULL THEN pass.team
+            WHEN rec.team IS NOT NULL THEN rec.team
+            ELSE rush.team
+        END AS team,
 
 
         -- Stats QB
@@ -86,10 +97,15 @@ SELECT
         pass_yrds,
         rec_yrds,
         rush_yrds,
-
+        pass_yrds + rush_yrds AS pass_and_rush_yds,
+        ROUND(SAFE_DIVIDE(pass_yrds, (rush_yrds + rush_yrds)),2) AS pass_rush_ratio,
+        qb_win_rate,
+        
         -- Infos générales
-        player,
         age,
+        team,
+        games_started,
+        games_played,
         CASE
             WHEN age >= 20
                 AND age <=24 THEN '20-24'
@@ -121,3 +137,4 @@ SELECT
         rb_rsh_yrds_per_attmpt,
         rb_rsh_yrds_per_game
     FROM temp
+    WHERE (pos <> 'QB') OR (pass_yrds > 200)

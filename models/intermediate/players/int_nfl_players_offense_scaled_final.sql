@@ -1,7 +1,6 @@
 WITH max_table AS (
     SELECT
         player_pk,
-        player,
         pos,
         pass_yrds,
         rec_yrds,
@@ -12,6 +11,9 @@ WITH max_table AS (
         
         -- Infos générales
         age,
+        team,
+        games_played,
+        games_started,
 
         -- Stats QB
         qb_comp_perc,
@@ -59,16 +61,18 @@ WITH max_table AS (
         MAX(rb_rsh_yrds_per_attmpt) OVER () AS max_rb_rsh_yrds_per_attmpt,
         MAX(rb_rsh_yrds_per_game) OVER () AS max_rb_rsh_yrds_per_game
 
-    FROM {{ ref('int_nfl_players_offense_final') }}
+    FROM {{ ref('int_nfl_players_offense_final') }} 
 )
 
 SELECT
     player_pk,
-    player,
     pos,
+    games_played,
+    games_started,
     pass_yrds,
     qb_rank,
     CASE
+        WHEN team = 'Cardinals' THEN 'Cardinals'
         WHEN qb_rank <= 5 THEN 'Top 5 quarterback'
         ELSE 'Average quarterback' 
     END AS qb_cat,
@@ -88,7 +92,7 @@ SELECT
     SAFE_DIVIDE(qb_avg_yrds_per_attmpt, max_qb_avg_yrds_per_attmpt) AS qb_avg_yrds_per_attmpt_scaled,
     SAFE_DIVIDE(qb_yrds_per_game, max_qb_yrds_per_game) AS qb_yrds_per_game_scaled,
     SAFE_DIVIDE(qb_qb_rating, max_qb_qb_rating) AS qb_qb_rating_scaled,
-    SAFE_DIVIDE(qb_sack_perc, max_qb_sack_perc) AS qb_sack_perc_scaled,
+    1 - SAFE_DIVIDE(qb_sack_perc, max_qb_sack_perc) AS qb_sack_avoid_perc_scaled,
     -- Stats WR
     SAFE_DIVIDE(wr_rec_yds_per_rec, max_wr_rec_yds_per_rec) AS wr_rec_yds_per_rec_scaled,
     SAFE_DIVIDE(wr_rec_succ_perc, max_wr_rec_succ_perc) AS wr_rec_succ_perc_scaled,

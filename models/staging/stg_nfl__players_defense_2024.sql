@@ -54,8 +54,8 @@ renamed as (
             ELSE 'Other'
         END as pos_category,
         pos,
-        g,
-        gs,
+        g AS games_played,
+        gs AS games_started,
         db_int,
         def_interceptions_yds,
         def_interceptions_inttd,
