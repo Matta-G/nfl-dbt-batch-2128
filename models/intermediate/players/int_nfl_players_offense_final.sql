@@ -31,6 +31,7 @@ temp AS (
         END AS player,
         pass_yrds,
         rec_yrds,
+        rushing_att,
         rush_yrds,
         reg_winrate AS qb_win_rate,
 
@@ -102,10 +103,13 @@ SELECT
         player,
         pass_yrds,
         rec_yrds,
+        rushing_att,
         rush_yrds,
         pass_yrds + rush_yrds AS pass_and_rush_yds,
+        rush_yrds + rec_yrds AS rb_tot_yds,
         ROUND(SAFE_DIVIDE(pass_yrds, (rush_yrds + rush_yrds)),2) AS pass_rush_ratio,
         qb_win_rate,
+        win_loose_ratio AS win_rate,
         
         -- Infos générales
         age,
@@ -142,5 +146,8 @@ SELECT
         rb_rsh_yrds_aftr_contact_per_attmpt, 
         rb_rsh_yrds_per_attmpt,
         rb_rsh_yrds_per_game
+    
     FROM temp
+    LEFT JOIN {{ ref('stg_nfl__2024_standings') }}
+    USING (team)
     WHERE (pos <> 'QB') OR (pass_yrds > 200)

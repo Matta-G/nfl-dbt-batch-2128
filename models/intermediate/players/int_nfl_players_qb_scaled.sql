@@ -61,12 +61,12 @@ SELECT
 
     CASE
         WHEN team = 'Cardinals' THEN 'Kyler Murray'
-        WHEN qb_rank <= 5 THEN 'Top 5 quarterback'
-        ELSE 'Average quarterback' 
+        WHEN qb_rank <= 5 THEN 'Top 5 (average)'
+        ELSE 'League average' 
     END AS qb_cat,
     CASE
         WHEN team = 'Cardinals' THEN 'Kyler Murray'
-        WHEN qb_rank <= 5 THEN 'Top 5 quarterback'
+        WHEN qb_rank <= 5 THEN 'Top 5 (average)'
         ELSE player 
     END AS qb_scatter_cat,
     -- Infos générales

@@ -3,22 +3,27 @@ version: 2
 sources:
   - name: nfl_dbt
     tables:
-        - name: raw_2024_play_by_play
-          config:
+      - name: raw_2024_play_by_play
+        config:
+          meta:
             alias: play_by_play
-        - name: raw_cardinals_roster
-          config:
+      - name: raw_cardinals_roster
+        config:
+          meta:
             alias: cards_roster
-        - name: raw_nfl_games_stats
-          config:
+      - name: raw_nfl_games_stats
+        config:
+          meta:
             alias: nfl_games_stats
-        - name: raw_saints_roster
-          config:
+      - name: raw_saints_roster
+        config:
+          meta:
             alias: saints_roster
   - name: nfl
-    tables: 
-        - name: 2024_agg_rankings_teams
-        - name: players_defense_2024
-        - name: players_passing_2024
-        - name: players_receiving_2024
-        - name: players_rushing_2024
+    tables:
+      - name: 2024_agg_rankings_teams
+      - name: players_defense_2024
+      - name: players_passing_2024
+      - name: players_receiving_2024
+      - name: players_rushing_2024
+      - name: 2024_standings

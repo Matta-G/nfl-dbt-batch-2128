@@ -9,6 +9,8 @@ SELECT
     age,
     games_played,
     games_started,
+    win_loose_ratio AS win_rate,
+    lb_tackles_comb,
     ROW_NUMBER() OVER (PARTITION BY pos_category ORDER BY lb_tackles_comb DESC) AS tackle_rank,
 
     CASE
@@ -35,5 +37,7 @@ SELECT
     lb_tackles_succ_rate_pct, -- Tackles success rate percentage : combined / missed tackles
 
 FROM {{ ref('int_nfl__players_defense_2024_clean') }}
+LEFT JOIN {{ ref('stg_nfl__2024_standings') }}
+USING (team)
 WHERE pos_category <> 'Other'
 ORDER BY lb_tackles_comb DESC
