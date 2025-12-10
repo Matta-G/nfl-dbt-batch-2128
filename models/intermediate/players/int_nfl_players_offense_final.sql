@@ -24,6 +24,11 @@ WITH union_table AS (
 temp AS (
     SELECT
         player_pk,
+        CASE
+            WHEN pass.player IS NOT NULL THEN pass.player
+            WHEN rec.player IS NOT NULL THEN rec.player
+            ELSE rush.player
+        END AS player,
         pass_yrds,
         rec_yrds,
         rush_yrds,
@@ -94,6 +99,7 @@ temp AS (
 
 SELECT
         player_pk,
+        player,
         pass_yrds,
         rec_yrds,
         rush_yrds,

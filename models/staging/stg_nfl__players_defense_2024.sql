@@ -48,9 +48,9 @@ renamed as (
             ELSE team
         END as team,
         CASE
-            WHEN pos IN('CB', 'LCB', 'RCB', 'LCB', 'RCB', 'S', 'SS', 'FS', 'DB') THEN 'DB'
-            WHEN pos IN('LB', 'MLB', 'ILB', 'LILB', 'RILB', 'OLB', 'LOLB', 'ROLB', 'LLB', 'RLB') THEN 'LB'
-            WHEN pos IN('DE', 'LDE', 'RDE', 'DT', 'NT', 'DL', 'LDT', 'RDT') THEN 'DL'
+            WHEN pos IN('CB', 'LCB', 'RCB', 'LCB', 'RCB', 'S', 'SS', 'FS', 'DB') THEN 'Defensive Back'
+            WHEN pos IN('LB', 'MLB', 'ILB', 'LILB', 'RILB', 'OLB', 'LOLB', 'ROLB', 'LLB', 'RLB') THEN 'Linebacker'
+            WHEN pos IN('DE', 'LDE', 'RDE', 'DT', 'NT', 'DL', 'LDT', 'RDT') THEN 'Defensive Line'
             ELSE 'Other'
         END as pos_category,
         pos,
